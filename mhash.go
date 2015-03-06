@@ -1,4 +1,4 @@
-package mutexmap
+package mhash
 
 import (
 	"encoding/binary"
@@ -7,20 +7,20 @@ import (
 	"unsafe"
 )
 
-type Mutexmap struct {
+type Mhash struct {
 	size    int64
 	mutexes []*sync.Mutex
 }
 
-func New(size int64) *Mutexmap {
+func New(size int64) *Mhash {
 	mutexes := make([]*sync.Mutex, size)
 	for i := int64(0); i < size; i++ {
 		mutexes[i] = &sync.Mutex{}
 	}
-	return &Mutexmap{size, mutexes}
+	return &Mhash{size, mutexes}
 }
 
-func (m *Mutexmap) Get(ptr unsafe.Pointer) *sync.Mutex {
+func (m *Mhash) Get(ptr unsafe.Pointer) *sync.Mutex {
 	// Convert the pointer to a byte array
 	intPtr := uint64(uintptr(ptr))
 	bytes := make([]byte, 8)

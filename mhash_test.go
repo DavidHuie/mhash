@@ -1,4 +1,4 @@
-package mutexmap
+package mhash
 
 import (
 	"bytes"
