@@ -8,13 +8,13 @@ import (
 )
 
 type Mhash struct {
-	size    int64
+	size    uint64
 	mutexes []*sync.Mutex
 }
 
-func New(size int64) *Mhash {
+func New(size uint64) *Mhash {
 	mutexes := make([]*sync.Mutex, size)
-	for i := int64(0); i < size; i++ {
+	for i := uint64(0); i < size; i++ {
 		mutexes[i] = &sync.Mutex{}
 	}
 	return &Mhash{size, mutexes}
